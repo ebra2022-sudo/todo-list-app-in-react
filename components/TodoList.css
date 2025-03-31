@@ -1,29 +1,27 @@
-/*
-Todo list css
-*/
-
-
+/* Default Styles for Light Mode */
 .todo-container {
-    max-width: 600px;
+    width: 1200px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Light background */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(236, 234, 234, 0.1);
 }
 
 .title {
     text-align: center;
     font-size: 24px;
-    color: #333;
+    color: #333; /* Dark text */
     margin-bottom: 20px;
 }
-.input-container{
+
+.input-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .todo_main {
     margin: 60px;
     max-width: 100%;
@@ -35,9 +33,9 @@ Todo list css
 }
 
 .todo-card {
-    width: 300px; /* Adjust the width of the cards as needed */
+    width: 500px;
     padding: 20px;
-    background-color: white;
+    background-color: white; /* Light background for cards */
     border-radius: 8px;
     margin-bottom: 20px;
     border: 2px solid grey;
@@ -80,7 +78,8 @@ Todo list css
 }
 
 .delete-button-heading {
-    height: 40px;
+    height: 80px;
+    width: 200px;
     background-color: rgb(46, 163, 46);
     color: #fff;
     border: none;
@@ -114,8 +113,59 @@ Todo list css
     transition: background-color 0.3s ease;
     margin-left: 25px;
 }
+
 .todo_inside_list {
     display: flex;
     gap: 140px;
     margin: 10px;
+}
+
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    .todo-container {
+        background-color: #333; /* Dark background */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    }
+
+    .title {
+        color: #f8f9fa; /* Light text for dark mode */
+    }
+
+    .todo-card {
+        background-color: #444; /* Dark background for cards */
+        border: 2px solid #555; /* Darker border for cards */
+    }
+
+    .heading-input {
+        background-color: #555; /* Dark input background */
+        border: 1px solid #777; /* Lighter border */
+        color: #f8f9fa; /* Light text inside input */
+    }
+
+    .delete-button {
+        background-color: #d32f2f; /* Darker red for delete button */
+    }
+
+    .delete-button-heading {
+        background-color: rgb(36, 128, 36); /* Darker green for heading button */
+    }
+
+    .add-list-button {
+        background-color: rgb(36, 128, 36); /* Darker green for add button */
+    }
+
+    .list-input {
+        background-color: #555; /* Dark background for list input */
+        color: #f8f9fa; /* Light text in input */
+    }
+
+    .list-item {
+        color: #f8f9fa; /* Light text for list items */
+    }
+
+    /* Optional: Make button borders stand out in dark mode */
+    .delete-button, .add-list-button {
+        border: 1px solid #444;
+    }
 }
