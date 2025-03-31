@@ -6,7 +6,7 @@ import { useState } from 'react';
 import './TodoList.css'
 import { useEffect } from 'react';
 
-export const TodoList = () => {
+export function TodoList() {
     // states
     const [todos, setTodos] = useState([]);
     const [inputHeading, setInputHeading] = useState('');
@@ -18,12 +18,61 @@ export const TodoList = () => {
             setInputHeading('');
         }
     }
+    
 
     const deleteTodo = (index) => {
         setTodos(todos.filter((_, i) => index !== i));
     }
 
+    const handleAddList = (index) => {
+        if (listInputs[index] && listInputs[index].trim() !== '') {
+            const newTodos = [...todos];
+            newTodos[index].lists.push(listInputs[index]);
+            setTodos(newTodos);
+            setInputLists({ ...listInputs, [index]: '' });
+        }
+    };
+    const handleListInputChange = (index, value) => {
+        setInputLists({ ...listInputs, [index]: value });
+    };
+
     useEffect(() => console.log(todos.map((item, _) =>item.heading)), [todos])
+
+    let content;
+    if (todos.length ===0) {
+        content = <h4>No todo list availiable</h4>
+    }
+    else {
+        content = todos.map((todo, index) => (
+             <div key={index} className="todo-card">
+             <div className="heading_todo">
+               <h3>{todo.heading}</h3>
+               <button className="delete-button-heading" onClick={() => deleteTodo(index)}>Delete Heading</button>
+               <div className='add_list'>
+               
+        </div>
+             </div>
+             <ul>
+             {todo.lists.map((list, listIndex) => (
+               <li key={listIndex} className='todo_inside_list'>
+                <p>{list}</p>
+               </li>
+             ))}
+           </ul>
+          
+             <div>
+             <input
+            type="text"
+            className="list-input"
+            placeholder="Add List"
+            value={listInputs[index] || ''}
+            onChange={(e) => handleListInputChange(index, e.target.value)}/>
+             <button className="add-list-button" onClick={() => handleAddList(index)}>Add List</button>
+             </div>
+           
+           </div>)
+        );
+    }
     return(
         <div className='todo-container'>
             <h1 className='titel'>My Todo List</h1>
@@ -42,15 +91,10 @@ export const TodoList = () => {
 
             </div>
             <div className='todo_main'>
-                {todos.map((todo, index) => (
-                    <div key={index} className="todo-card">
-                        <div className="heading_todo">
-                            <h3>{todo.heading}</h3> {/* Display the heading here */}
-                            <button className="delete-button-heading" onClick={() =>deleteTodo(index)}>Delete Heading</button>
-                        </div>
-                    </div>
-                    ))
-                }
+                {content}
+
+
+            
             </div>
 
         </div>
